@@ -1,0 +1,9 @@
+{
+	"NEXT_PUBLIC_API": "https://htss-dakhoaanviet.benhvien.tech:8888/htss",
+	"NEXT_PUBLIC_API_DEV": "https://htss-dakhoaanviet.benhvien.tech:8888/htss",
+	"NEXT_PUBLIC_API_CORE": "https://api-booking.meapp.vn/core",
+	"NEXT_PUBLIC_API_ME_APP": "https://api-booking.meapp.vn",
+	"NEXT_PUBLIC_SOCKET": "https://htss-dakhoaanviet.benhvien.tech:8888/htss-signalr/biometricHub",
+	"NEXT_PUBLIC_API_MEDIA": "https://api-booking.meapp.vn/core/common/preview",
+	"NEXT_PUBLIC_IMAGES": "https://api-booking.meapp.vn/core/common/preview"
+}

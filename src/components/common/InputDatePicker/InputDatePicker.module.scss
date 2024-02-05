@@ -1,0 +1,47 @@
+.main {
+	width: 100%;
+}
+
+.container {
+	height: 38px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	width: 100%;
+	color: #000;
+	font-size: var(--size-text);
+	font-weight: var(--font-weight);
+	line-height: 14px;
+	padding: 8px 20px;
+	border: 1px solid #dcdfe6;
+	background-color: #fff;
+	border-radius: 8px;
+	transition: 0.2s;
+
+	.textValue {
+		color: #000;
+
+		&.placeholder {
+			color: rgba(0, 0, 0, 0.5);
+		}
+	}
+
+	&.show {
+		background-color: #fff;
+		border: 1px solid var(--primary);
+	}
+
+	&.disabled {
+		color: rgba(0, 0, 0, 0.7);
+		background-color: var(--light-grey);
+		border: 1px solid transparent;
+	}
+}
+
+.label {
+	font-size: var(--size-text);
+	font-weight: var(--font-weight);
+	margin-bottom: 8px;
+	display: block;
+}

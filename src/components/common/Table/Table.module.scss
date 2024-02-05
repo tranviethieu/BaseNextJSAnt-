@@ -1,0 +1,89 @@
+.container {
+	overflow-x: auto;
+	padding-bottom: 4px;
+
+	&.activeThead {
+		thead {
+			background: #f3f3f4;
+		}
+
+		th,
+		td {
+			padding: 16px;
+		}
+	}
+
+	&::-webkit-scrollbar {
+		height: 4px;
+	}
+
+	table,
+	td,
+	th {
+		text-align: left;
+	}
+
+	table {
+		border-collapse: collapse;
+		border-spacing: 0 2px;
+		width: 100%;
+	}
+
+	th,
+	td {
+		padding: 16px 16px 16px 0;
+		line-height: 16px;
+		white-space: nowrap;
+	}
+
+	th {
+		color: #27282b;
+		font-size: var(--size-text);
+		font-weight: var(--font-weight);
+		white-space: nowrap;
+		padding-right: 24px;
+
+		&.checkBox {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			width: 100%;
+		}
+
+		&.textEnd {
+			text-align: right;
+		}
+
+		&.textStart {
+			text-align: left;
+		}
+
+		&.textCenter {
+			text-align: center;
+		}
+	}
+
+	thead {
+		box-sizing: border-box;
+		background: #fff;
+	}
+
+	th {
+		border-bottom: 1px solid #c8c9cc;
+	}
+
+	td {
+		color: #27282b;
+		font-size: var(--size-text);
+		font-weight: var(--font-weight);
+		line-height: 14px;
+		border-bottom: 1px solid #c8c9cc;
+
+		.checkBox {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			width: 100%;
+		}
+	}
+}

@@ -1,0 +1,20 @@
+.midMain{
+	margin-top: 50px;
+	padding: 20px;
+    padding-top: 0;
+	height: 496px;
+	animation: fadeIn 0.3s ease;
+    h2{
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+}
+.lists{
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+    .item{
+        border-bottom: 1px solid #C8C9CC;
+        cursor: pointer;
+    }
+}

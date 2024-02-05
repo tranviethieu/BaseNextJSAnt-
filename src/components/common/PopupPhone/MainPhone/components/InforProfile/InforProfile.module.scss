@@ -1,0 +1,101 @@
+.midMain{
+	margin-top: 50px;
+	padding: 20px;
+    padding-top: 0;
+	height: 496px;
+	animation: fadeIn 0.3s ease;
+    h2{
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+    .profile{
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        .avatar{
+            width: 90px;
+            height: 90px;
+            margin: 10px auto;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        h4{
+            font-size: 19px;
+            color: #4979D1;
+            text-align: center;
+            font-weight: 600;
+            
+        }
+        a{
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 18px; /* 150% */
+            text-decoration-line: underline;
+            color: #4979D1;
+            text-align: center;
+            cursor: pointer;
+        }
+        .dflex{
+            display: flex;
+            gap: 6px;
+            margin: 0 auto;
+        }
+        .cardAddress{
+            border-radius: 10px;
+            background: #D8E6FF;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 14px 0;
+        }
+        .address{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            flex-direction: row;
+            gap: 4px;
+            p{
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 18px;
+            }
+        }
+        .listCard{
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            .cardTab{
+                width: 60px;
+                height: 60px;
+                box-shadow: 0px 5px 10px 0px rgba(0, 64, 128, 0.04);
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                div:nth-child(1){
+                    width: 30px;
+                    height: 30px;
+                    //padding: 18px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 8px;
+                    background: #FDE4ED;
+                }
+                p{
+                    font-size: 12px;
+                }
+                
+            }
+        }
+        .call{
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+    }
+}

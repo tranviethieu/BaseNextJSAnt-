@@ -1,0 +1,66 @@
+@import '../../../../../styles/variables';
+
+.container {
+	height: calc($heightMenuTab + ($paddingSides * 2));
+	padding: $paddingSides 0;
+}
+
+.main {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-radius: 10px;
+	background: #fff;
+}
+
+.listTab {
+	display: flex;
+	align-items: center;
+}
+
+.permission {
+	margin-right: 10px;
+	min-width: 240px;
+}
+
+.tab {
+	position: relative;
+	cursor: pointer;
+	user-select: none;
+	width: fit-content;
+	padding: 15px 20px;
+
+	&:hover {
+		.tab_name {
+			color: var(--primary);
+		}
+	}
+
+	&.active {
+		&::after {
+			width: 100%;
+		}
+		.tab_name {
+			color: var(--primary);
+		}
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 0;
+		height: 3px;
+		background: var(--primary);
+	}
+}
+
+.tab_name {
+	transition: 0.3s;
+	font-size: var(--size-text);
+	font-weight: 300;
+	line-height: 22px;
+	color: #000;
+}

@@ -1,0 +1,10 @@
+services:
+    crm:
+        image: ${CI_REGISTRY}/web/crm:latest
+        restart: always
+        ports:
+            - 8000:3000
+        volumes:
+            - /app/service/htss/crm/env-config.json:/app/public/static/env-config.json
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'

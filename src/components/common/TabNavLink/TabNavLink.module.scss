@@ -1,0 +1,86 @@
+@import '../../../styles/variables';
+@import '../../../styles/color';
+
+.container {
+	overflow: auto;
+	white-space: nowrap;
+
+	&::-webkit-scrollbar {
+		height: 3px;
+	}
+
+	&.isPadding {
+		padding-bottom: 3px;
+	}
+
+	&.outline {
+		overflow: auto;
+		border-bottom: 1px solid var(--grey);
+		padding-bottom: 3px;
+		z-index: 1;
+
+		.item {
+			position: relative;
+			padding: 6px 10px;
+			border-radius: 0px;
+			background-color: transparent;
+			color: var(--light);
+			font-size: var(--size-text);
+			font-weight: var(--font-weight);
+
+			& + .item {
+				margin-left: 10px;
+			}
+
+			&.active {
+				border-radius: 5px;
+				background: var(--bg-grey);
+
+				&::after {
+					position: absolute;
+					bottom: -4px;
+					left: 0;
+					right: 0;
+					content: '';
+					height: 2px;
+					background-color: var(--light);
+				}
+			}
+		}
+	}
+}
+
+.item {
+	min-width: 60px;
+	cursor: pointer;
+	user-select: none;
+	display: inline-block;
+	text-align: center;
+	padding: 6px 10px;
+	border-radius: 8px;
+	background: rgba(255, 255, 255, 0.2);
+	color: #fff;
+	font-size: var(--size-text);
+	font-weight: var(--font-weight);
+
+	& + .item {
+		margin-left: 8px;
+	}
+
+	&.active {
+		color: var(--light);
+		background: var(--primary);
+	}
+}
+
+@media (max-width: $widthMobile) {
+	.item {
+		font-size: var(--size-text);
+	}
+}
+
+@media (min-width: $widthMobile) and (max-width: $widthTablet) {
+	.item {
+		font-size: var(--size-text);
+	}
+}

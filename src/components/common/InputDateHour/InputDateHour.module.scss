@@ -1,0 +1,40 @@
+.main {
+	width: 100%;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	font-weight: var(--font-weight);
+	padding: 8px 24px;
+	cursor: pointer;
+	user-select: none;
+	font-size: var(--size-text);
+	font-weight: var(--font-weight);
+	border: 1px solid #dcdfe6;
+	background-color: #fff;
+	border-radius: 8px;
+	transition: 0.2s;
+
+	.textValue {
+		color: #000;
+
+		&.placeholder {
+			color: rgba(0, 0, 0, 0.5);
+		}
+	}
+
+	&.show {
+		background-color: #fff;
+		border: 1px solid var(--primary);
+	}
+}
+
+.label {
+	font-size: var(--size-title);
+	font-weight: var(--font-weight);
+	margin-bottom: 8px;
+	display: block;
+}

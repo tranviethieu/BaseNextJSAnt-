@@ -1,0 +1,42 @@
+.container {
+	height: 40px;
+	font-weight: var(--font-weight);
+	font-size: var(--size-text);
+	color: #303b48;
+	padding: 8px 12px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	user-select: none;
+	transition: 0.2s;
+	border-radius: 10px;
+	background: rgba(255, 255, 255, 0.3);
+	border: 1px solid transparent;
+	display: flex;
+	align-items: center;
+	cursor: text;
+	transition: 0.3s;
+
+	&.focus {
+		border: 1px solid #fff;
+		// background: rgba(87, 85, 255, 0.1);
+	}
+
+	&:hover {
+		border: 1px solid #fff;
+	}
+
+	input {
+		display: block;
+		flex: 1;
+		outline: none;
+		border: none;
+		background-color: transparent;
+		padding-left: 4px;
+		color: #fff;
+
+		&::placeholder {
+			color: #faf9f9;
+		}
+	}
+}

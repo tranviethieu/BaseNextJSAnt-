@@ -1,0 +1,38 @@
+// Size nhỏ
+.global-size-sm {
+	--size-text: 13px;
+	--size-label: 14px;
+	--size-title: 16px;
+
+	--size-title-xl: 18px;
+	--size-title-components: 20px;
+
+	--font-weight: 400;
+	--font-weight-title: 500;
+}
+
+// Size vừa
+.global-size-md {
+	--size-text: 14px;
+	--size-label: 16px;
+	--size-title: 18px;
+
+	--size-title-xl: 20px;
+	--size-title-components: 24px;
+
+	--font-weight: 500;
+	--font-weight-title: 600;
+}
+
+// Size lớn
+.global-size-xl {
+	--size-text: 16px;
+	--size-label: 18px;
+	--size-title: 20px;
+
+	--size-title-xl: 24px;
+	--size-title-components: 28px;
+
+	--font-weight: 600;
+	--font-weight-title: 700;
+}

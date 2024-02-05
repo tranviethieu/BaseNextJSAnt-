@@ -1,0 +1,29 @@
+@import '../../../styles/color';
+@import '../../../styles/variables';
+
+.container {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.box_main {
+	// flex: 1;
+	// display: grid;
+	// grid-template-columns: 1fr $widthSideCall;
+}
+
+.main {
+	padding: 0 $paddingSides;
+	display: flex;
+	flex-direction: column;
+}
+
+.children {
+	height: calc(100vh - $heightHeader - $heightMenuTab - $heightFooter - ($paddingSides * 3));
+	max-height: 100%;
+
+	&.notChild {
+		overflow: auto;
+	}
+}

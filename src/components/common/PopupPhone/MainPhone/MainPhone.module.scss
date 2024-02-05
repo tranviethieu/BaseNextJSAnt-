@@ -1,0 +1,406 @@
+
+.phone{
+	width: 310px;
+	height: var(--heght);
+	padding: 24px 28px;
+	background: black;
+	box-shadow: 0 0 0.1em 0.25em hsl(var(--c-h), 20%, 25%), 0 0 0 var(--border-width) hsl(var(--c-h), 30%, 85%);
+	border-radius: var(--border-radius);
+    
+
+	&::before{
+		content: "";
+		position: absolute;
+		top: var(--border-radius);
+		right: calc(var(--border-width) * -1);
+		bottom: calc(var(--border-radius));
+		left: calc(var(--border-width) * -1);
+		border: 0.5em solid hsl(var(--c-h), 20%, 30%);
+		border-left-width: 0;
+		border-right-width: 0;
+	}
+}
+
+.screenContainer{
+	position: absolute;
+    inset: 0;
+    border-radius: var(--border-radius);
+    border: var(--pad) solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--pad) * 2);
+	&::before{
+		content: "";
+		position: absolute;
+		z-index: 102;
+		background: white;
+		width: 36.6%;
+		bottom: calc(var(--pad) * 1.75);
+		height: calc(var(--pad) * 1.5);
+		border-radius: calc(var(--pad) * 1.25);
+		filter: drop-shadow(0 0.1em 0.25em rgba(0, 0, 0, 0.1));
+	}
+}
+.buttons{
+    position: absolute;
+    inset: calc(var(--border-width) * -1);
+    pointer-events: none;
+	
+}
+.buttons .left, .buttons .right{
+    position: absolute;
+    width: var(--button-width);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5em;
+}
+
+.buttons .left{
+    right: 100%;
+    top: calc(var(--border-radius) * 2);
+}
+.buttons .left .button:nth-child(1){
+    height: 3em;
+    margin-bottom: 0.5em;
+}
+
+.buttons .right{
+    left: 100%;
+    transform: scale3d(-1, 1, 1);
+    top: calc(var(--border-radius) * 3);
+}
+
+.buttons .right .button{
+    height: 9.5em;
+}
+
+.buttons .button{
+    background: hsl(var(--c-h), 20%, 95%);
+    height: 6em;
+    box-shadow: inset -0.15em 0 0.1em black, inset 0 0 0.1em hsl(var(--c-h), 30%, 90%), inset 0 0.2em 0.1em hsl(var(--c-h), 30%, 90%), inset 0 -0.2em 0.1em hsl(var(--c-h), 30%, 90%), inset -0.1em 0.333em 0.1em rgba(0, 0, 0, 0.5), inset -0.1em -0.333em 0.1em rgba(0, 0, 0, 0.5);
+    border-top-left-radius: 0.2em;
+    border-bottom-left-radius: 0.2em;
+}
+
+.camera{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 24px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    pointer-events: none;
+    position: absolute;
+    z-index: 4;
+    top: calc(var(--pad) * 2);
+    right: calc(50% - calc(var(--notch-width) * 0.5));
+    margin-right: calc(var(--pad) * 0.333);
+}
+
+.camera::before{
+    content: "";
+    height: 33.3%;
+    aspect-ratio: 1;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0.25em #4c4da3;
+    background: radial-gradient(#6667ac, transparent 50%) no-repeat 33.3% 10%/75% 50%, radial-gradient(#454680, transparent 50%) no-repeat 60% 85%/50% 50%;
+    background-color: #080928;
+}
+
+.notchContainer{
+    position: absolute;
+    z-index: 3;
+    top: 8px;
+    right: 8px;
+    left: 8px;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    max-height: 60px;
+    pointer-events: none;
+    outline: none;
+    transition: var(--notch-duration) var(--ease);
+    transition-property: max-height, max-width, filter, transform;
+    will-change: max-width, max-height, filter;
+}
+
+.notchContainer:hover, .notchContainer:focus-within{
+    //--shadow-opacity: 0.5s;
+    //transition-timing-function: var(--ease-spring);
+}
+
+.notchContainer:hover .content, .notchContainer:focus-within .content{
+    --content-padding: 2em;
+}
+
+.notchContainer:hover .content .text, .notchContainer:focus-within .content .text{
+    opacity: 1;
+}
+
+.notchContainer:hover .notch, .notchContainer:focus-within .notch{
+    max-width: 100%;
+    max-height: 100%;
+    pointer-events: all;
+    transform: scale3d(1, 1, 1);
+}
+
+.notchContainer:hover~.notch-blur, .notchContainer:focus-within~.notch-blur{
+    opacity: 1;
+    max-height: calc(var(--notch-radius) * 2.75 + var(--pad));
+}
+
+.notchContainer:focus-within{
+    max-height: calc(var(--notch-radius) * 3);
+    --bar-height: 1em;
+    --bar-opacity: 1;
+}
+
+.notchContainer:focus-within .left, .notchContainer:focus-within .right{
+    max-height: calc(100% - var(--bar-height, 0%) - var(--content-gap));
+}
+
+.notchContainer:focus-within~.notchBlur{
+    max-height: calc(var(--notch-radius) * 5);
+    opacity: 1;
+}
+
+.notchBlur{
+    position: absolute;
+     z-index: 2;
+     top: calc(var(--pad) - 3px);
+     right: calc(var(--pad) - 3px);
+     left: calc(var(--pad) - 3px);
+     height: 100%;
+     max-height: calc(var(--notch-radius) * 2.5);
+	 cursor: move;
+    // -webkit-backdrop-filter: blur(0.2em);
+    // backdrop-filter: blur(0.2em);
+    // fill: blur(0.1em);
+    // -webkit-mask-image: linear-gradient(to bottom, black calc(100% - var(--notch-radius)), transparent);
+    // mask-image: linear-gradient(to bottom, black calc(100% - var(--notch-radius)), transparent);
+    // opacity: 0;
+    // transition: var(--notch-duration) ease-in-out;
+    // border-radius: calc(var(--border-radius) - var(--pad));
+    // transition: var(--notch-duration) var(--ease);
+    // transition-property: max-height, max-width, filter, transform;
+    // will-change: max-width, max-height, filter;
+}
+
+.notch{
+    position: relative;
+    background: black;
+    border-radius: 36px;
+    pointer-events: all;
+    overflow: hidden;
+    color: white;
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+    transition: inherit;
+    transition-property: inherit;
+    will-change: inherit;
+    filter: drop-shadow(0 1em 2em hsla(0 0% 0%/var(--shadow-opacity, 0)));
+    transform: scale3d(0.375, 0.4, 1);
+    transform-origin: top;
+}
+
+.content{
+    --content-padding: 0.75em;
+    --duration-height: 0.5em;
+    --content-gap: 1em;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: stretch;
+    padding: var(--content-padding);
+    gap: var(--content-gap);
+    font-size: 100%;
+    transition-property: padding;
+    will-change: padding;
+}
+
+.content .left, .content .right{
+    height: 100%;
+    max-height: calc(100% - var(--bar-height, 0%));
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.content, .content .left, .content .right, .content .bar, .content .text{
+    transition: var(--notch-duration) --ease-out;
+}
+
+.content .left, .content .right, .content .bar{
+    transition-property: max-height, opacity;
+    will-change: max-height;
+}
+
+.content .left{
+    flex-grow: 2;
+}
+
+.content .text{
+    display: flex;
+    flex-direction: column;
+    gap: 0.333em;
+    transition-property: opacity;
+    opacity: var(--bar-opacity, 0);
+}
+
+.content .text:before{
+    //content: "MusicArtistName";
+    order: 1;
+    text-transform: uppercase;
+}
+
+.content .text:after{
+    order: 2;
+    content: "Iphone";
+    opacity: 0.5;
+}
+
+.content .right{
+    flex-grow: 1;
+}
+
+.content .title{
+    background: #1a1ab3;
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 33.3%;
+    position: relative;
+}
+
+.content .title:before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(50% 50% at 55% 40%, #131386, #cd1385 75%, transparent) center/133.3% 133.3%;
+    background-color: yellow;
+    filter: blur(0.05em);
+}
+
+.content .bar{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    flex-basis: 100%;
+    max-height: var(--bar-height, 0%);
+    color: rgba(255, 255, 255, 0.5);
+    opacity: var(--bar-opacity, 0);
+}
+
+.content .bar .duration{
+    position: relative;
+    height: var(--duration-height);
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: calc(var(--duration-height) * 0.5);
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.content .bar .duration::before{
+    content: "";
+    height: 100%;
+    background: white;
+    width: 25%;
+    position: absolute;
+}
+
+.content .bar::before{
+    content: "1:20";
+}
+
+.content .bar:after{
+    content: "-1.48";
+}
+
+
+.bg1{
+	position: absolute;
+    inset: 0;
+    background: #fff;
+    border-radius: calc(var(--border-radius) - var(--pad));
+    overflow: hidden;
+	display: flex;
+	flex-direction: column;
+    height: 100%;
+	.bottomMain{
+		margin-top: auto;
+		padding: 10px 15px;
+		cursor: move;
+		display: flex;
+		justify-content: space-between;
+		.tabPhone{
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+			color: #979797;
+			cursor: pointer;
+            transition: background-color 0.3s ease;
+			svg{
+				margin: 0 auto;
+				
+			}
+			p{
+				
+				font-size: 14px;
+				font-weight: 400;
+				line-height: 14px;
+			}
+			
+		}
+		.tabPhone:hover, .tabPhone.active{
+			color: #4444ff !important;
+		}
+	}
+}
+.divCallFlex{
+	display: flex;
+    justify-content: center;
+	position: relative;
+	.clearNumberPhone{
+		position: absolute;
+		right: -100px;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 50px;
+	}
+}
+.disableCls{
+	display: none !important;
+}
+.callIn{
+	width: 73px;
+	height: 73px;
+	border-radius: 50%;
+	background: #2ECF56;
+	position: relative;
+	svg{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+}
+.inputPhoneCls{
+	color: #000;
+    text-align: center;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+    width: 100%;
+	border: none;
+}
+.timePhone{
+    position: absolute;
+    top: 6px;
+    left: 20px;
+    font-size: 14px;
+}

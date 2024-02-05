@@ -1,0 +1,86 @@
+.midMain{
+	margin-top: 50px;
+	padding: 20px;
+	height: 496px;
+	animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+	from {
+	  opacity: 0;
+	}
+	to {
+	  opacity: 1;
+	}
+  }
+.keyboard{
+	display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 10px;
+      max-width: 300px;
+	  padding: 24px;
+	  padding-top: 36px;
+	  .key {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 65.33px;
+		font-size: 1.5em;
+		background-color: #fff;
+		border: 1px solid #ccc;
+		border-radius: 50%;
+		cursor: pointer;
+		transition: background-color 0.3s;
+	  }
+	  .key:hover {
+		background-color: #e0e0e0;
+	  }
+}
+.inputPhoneCls{
+	color: #000;
+    text-align: center;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+    width: 100%;
+	border: none;
+}
+.divCallFlex{
+	display: flex;
+    justify-content: center;
+	position: relative;
+	.clearNumberPhone{
+		position: absolute;
+        cursor: pointer;
+		right: -100px;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 50px;
+	}
+}
+.disableCls{
+	display: none;
+}
+.callIn{
+	width: 73px;
+	height: 73px;
+	border-radius: 50%;
+	background: #2ECF56;
+	position: relative;
+	svg{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+}
+.inputPhoneCls{
+	color: #000;
+    text-align: center;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+    width: 100%;
+	border: none;
+}

@@ -1,0 +1,93 @@
+variables:
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_URL: $CI_REGISTRY_IMAGE
+
+services:
+  - name: docker:20.10.21-dind-alpine3.16
+    command:
+      [
+        "--insecure-registry=192.168.6.34:5004",
+        "--insecure-registry=docker.benhvien.tech:5007",
+        "--registry-mirror=http://docker.benhvien.tech:5007",
+      ]
+    alias: docker
+
+stages:
+  - build
+  - deploy
+
+build-job:crm:
+  stage: build
+  image: docker:20.10.21-alpine3.16
+  before_script:
+    - ping -c 1 svgitlab.benhvien.tech
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build -t $DOCKER_URL/crm . -f Dockerfile
+    - docker push $DOCKER_URL/crm
+    - echo "BUILD_CRM=true" >> deploy.env
+  only:
+    refs:
+      - dev
+    changes:
+      - .gitlab-ci.yml
+      - .env
+      - Dockerfile
+      - docker-compose.crm.yml
+      - public/**
+      - public/**/*.html
+      - public/**/*.json
+      - src/**/*.json
+      - src/**/*.ts
+      - src/**/*.tsx
+      - src/**/*.css
+      - src/**/*.scss
+
+deploy-web:dev:
+  stage: deploy
+  image: alpine:3.18
+  variables:
+    SSH_SERVER_IP: 192.168.6.27
+    SSH_WEB_SERVER_IP: $SSH_SERVER_IP
+    PATH_TO_PROJECT: /app/service/htss
+    GROUP_PROJECT: htss
+    PROJECT: web
+    BRANCH: dev
+    GIT_STRATEGY: none
+    SSH_PORT: 22
+  dependencies: []
+  before_script:
+    - ping -c 1 svgitlab.benhvien.tech
+    - apk add --update --no-cache openssh-client
+    - eval $(ssh-agent -s)
+    - /bin/sh -c 'ssh-add <(echo "$SSH_PRIVATE_KEY")'
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan -p $SSH_PORT $SSH_SERVER_IP >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    # install git (GIT_STRATEGY: none)
+    - apk add --no-cache git
+  script:
+    # Notify
+    - |
+      # BOT_MESSAGE="Đang deploy project: ${CI_COMMIT_BRANCH}:${CI_PROJECT_NAME}"
+      # wget -q "${TELEGRAM_BOT_API}?chat_id=${TELEGRAM_CHAT_ID}&parse_mode=html&text=${BOT_MESSAGE}"
+    - git clone -b $BRANCH --single-branch https://gitlab-ci-token:${CI_JOB_TOKEN}@svgitlab.benhvien.tech/$GROUP_PROJECT/$PROJECT.git
+    - cd $PROJECT
+    - scp -P $SSH_PORT docker-compose.crm.yml $SSH_USER@$SSH_SERVER_IP:$PATH_TO_PROJECT
+    - scp -P $SSH_PORT -r public/static/env-config.json $SSH_USER@$SSH_SERVER_IP:$PATH_TO_PROJECT/crm
+    - >
+      ssh -p $SSH_PORT $SSH_USER@$SSH_SERVER_IP 
+      "cd ${PATH_TO_PROJECT};
+      docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD 192.168.6.34:5004;
+      docker compose -f docker-compose.crm.yml pull crm;
+      docker compose -f docker-compose.crm.yml stop crm;
+      docker compose -f docker-compose.crm.yml rm crm;
+      docker compose -f docker-compose.crm.yml up -d;"
+    - sleep 5
+    - |
+      # BOT_MESSAGE="Hoàn thành deploy project: ${CI_COMMIT_BRANCH}:${CI_PROJECT_NAME}"
+      # wget -q "${TELEGRAM_BOT_API}?chat_id=${TELEGRAM_CHAT_ID}&parse_mode=html&text=${BOT_MESSAGE}"
+  only:
+    refs:
+      - dev

@@ -1,0 +1,17 @@
+.container {
+	min-height: 45vh;
+	&.small {
+		min-height: 25vh;
+		.loading {
+			min-height: 25vh;
+			//width: 130px;
+		}
+	}
+}
+
+.loading {
+	min-height: 45vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
